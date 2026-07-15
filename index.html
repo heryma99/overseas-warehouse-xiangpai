@@ -35,8 +35,31 @@ tr.subtot td{background:#11161d;font-weight:700;border-top:1px dashed var(--line
 .legend{font-size:12px;color:var(--mut);margin:8px 0 0}
 footer{color:var(--mut);font-size:11.5px;text-align:center;padding:18px;border-top:1px solid var(--line);margin-top:10px}
 .seghead{color:var(--acc);font-weight:700;background:#11161d}
-</style></head>
-<body>
+</style><style>
+body.locked > *:not(#gate-overlay){display:none !important;}
+#gate-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#1e293b);font-family:-apple-system,"Microsoft YaHei",sans-serif;}
+body:not(.locked) #gate-overlay{display:none !important;}
+.gate-box{background:#fff;border-radius:16px;padding:34px 38px;width:330px;max-width:90vw;box-shadow:0 24px 70px rgba(0,0,0,.5);text-align:center;}
+.gate-title{font-size:21px;font-weight:800;color:#0f172a;margin-bottom:6px;}
+.gate-sub{font-size:13px;color:#64748b;margin-bottom:20px;}
+#gate-pwd{width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #cbd5e1;border-radius:10px;font-size:15px;outline:none;transition:border-color .15s;}
+#gate-pwd:focus{border-color:#2563eb;}
+#gate-btn{margin-top:16px;width:100%;padding:12px;border:none;border-radius:10px;background:#2563eb;color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;}
+#gate-btn:hover{background:#1d4ed8;}
+.gate-err{color:#dc2626;font-size:12.5px;margin-top:12px;min-height:16px;}
+.gate-foot{margin-top:16px;font-size:11px;color:#94a3b8;}
+</style>
+</head>
+<body class="locked"><div id="gate-overlay">
+  <div class="gate-box">
+    <div class="gate-title">🔒 受限访问</div>
+    <div class="gate-sub">襄派海外仓模型 · 请输入访问密码</div>
+    <input id="gate-pwd" type="password" placeholder="访问密码" autocomplete="off" />
+    <button id="gate-btn" type="button">进入看板</button>
+    <div id="gate-err" class="gate-err"></div>
+    <div class="gate-foot">密码请联系管理员获取</div>
+  </div>
+</div>
 <header>
   <h1>襄派海外仓 (XiangPai) 价格预估模型</h1>
   <p>分段预估（头程 / 入库上架 / 仓储 / 出库 / 尾程 / 退货换标）+ 全链路汇总 ｜ 覆盖：美国本地仓 · 退货换标+尾程专长 ｜ 评级 🟢已验证 / 🟡报价完整·待账单核 / 🔴未对齐 / ⚪无数据</p>
@@ -212,4 +235,5 @@ function calcSingle(){
 }
 calcSingle();
 </script>
+<script src="./gate.js"></script>
 </body></html>
